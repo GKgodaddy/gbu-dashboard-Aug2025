@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GoDaddy Finance Teams Good Bad Ugly Dashboard - August 2025">
+    <meta name="author" content="GoDaddy Finance Innovation Team">
+    <title>GoDaddy Finance Teams - GBU Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4a5d4a 0%, #3a4d3a 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Navigation */
+        .nav-header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #6b8e6b, #5a7c5a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .nav-header p {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            background: linear-gradient(135deg, #4a5d4a, #3a4d3a);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.85em;
+        }
+
+        .nav-tab:hover, .nav-tab.active {
+            background: linear-gradient(135deg, #5a6d5a, #4a5d4a);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            margin: 20px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #6b8e6b, #ffc107, #dc3545);
+        }
+
+        /* Overview Section Styles */
+        .overview-content {
+            padding: 40px;
+        }
+
+        .overview-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-left: 5px solid #6b8e6b;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6b8e6b, #5a7c5a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            color: #555;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .team-overview-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-left: 6px solid #6b8e6b;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .team-overview-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .team-name {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #4a5d4a;
+            margin-bottom: 15px;
+        }
+
+        .team-metrics {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-number {
+            font-size: 2em;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .metric-number.good { color: #6b8e6b; }
+        .metric-number.bad { color: #ffc107; }
+        .metric-number.ugly { color: #dc3545; }
+
+        .metric-label {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .team-summary {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        /* Individual Report Styles */
+        .report-content {
+            padding: 40px;
+        }
+
+        .report-header {
+            background: linear-gradient(135deg, #4a5d4a, #3a4d3a);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin: -40px -40px 40px -40px;
+        }
+
+        .report-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+        }
+
+        .report-header h2 {
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .report-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .banner {
+            background: linear-gradient(135deg, #6b8e6b, #5a7c5a);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin: -40px -40px 40px -40px;
+            box-shadow: 0 10px 30px rgba(107,142,107,0.3);
+        }
+
+        .banner h3 {
+            font-size: 2em;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-left: 8px solid;
+        }
+
+        .section.good {
+            background: linear-gradient(135deg, rgba(107,142,107,0.08), rgba(255,255,255,0.95));
+            border-left-color: #6b8e6b;
+        }
+
+        .section.bad {
+            background: linear-gradient(135deg, rgba(255,193,7,0.08), rgba(255,255,255,0.95));
+            border-left-color: #ffc107;
+        }
+
+        .section.ugly {
+            background: linear-gradient(135deg, rgba(220,53,69,0.05), rgba(255,255,255,0.95));
+            border-left-color: #dc3545;
+        }
+
+        .section.summary {
+            background: linear-gradient(135deg, rgba(74,93,74,0.08), rgba(255,255,255,0.95));
+            border-left-color: #4a5d4a;
+        }
+
+        .section.takeaways {
+            background: linear-gradient(135deg, rgba(58,77,58,0.08), rgba(255,255,255,0.95));
+            border-left-color: #3a4d3a;
+        }
+
+        .section-title {
+            font-size: 2em;
+            font-weight: 800;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #333;
+        }
+
+        .subsection-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #444;
+            border-bottom: 2px solid #f1f3f4;
+            padding-bottom: 10px;
+        }
+
+        .item {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .item.good { border-left-color: #6b8e6b; }
+        .item.bad { border-left-color: #ffc107; }
+        .item.ugly { border-left-color: #dc3545; }
+
+        .item-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .item-content {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .detail-title {
+            font-weight: 700;
+            color: #4a5d4a;
+            margin: 15px 0 8px 0;
+        }
+
+        .impact-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #6b8e6b, #5a7c5a);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin: 10px 10px 0 0;
+        }
+
+        .impact-badge.high {
+            background: linear-gradient(135deg, #dc3545, #e74c3c);
+        }
+
+        .contributors {
+            background: linear-gradient(135deg, rgba(74,93,74,0.1), #f8f9fa);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 4px solid #4a5d4a;
+        }
+
+        .contributors .label {
+            font-weight: 700;
+            color: #3a4d3a;
+            margin-bottom: 5px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #4a5d4a;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .key-takeaway {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3a4d3a;
+        }
+
+        .key-takeaway .number {
+            font-weight: 800;
+            color: #3a4d3a;
+            font-size: 1.1em;
+        }
+
+        .key-takeaway .title {
+            font-weight: 700;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .overall-assessment {
+            background: linear-gradient(135deg, #4a5d4a, #3a4d3a);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 30px;
+            box-shadow: 0 15px 40px rgba(74,93,74,0.3);
+        }
+
+        .overall-assessment h3 {
+            font-size: 1.8em;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .no-ugly, .no-bad {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #6b8e6b, #5a7c5a);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(107,142,107,0.3);
+        }
+
+        .no-ugly h3, .no-bad h3 {
+            font-size: 2em;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-tab {
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 5px;
+            }
+            
+            .overview-stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+            
+            .teams-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .report-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Header -->
+        <div class="nav-header">
+            <h1>🏢 GoDaddy Finance Teams</h1>
+            <p>Good, Bad & Ugly Dashboard - August 2025</p>
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="showSection('overview')">📊 Overview</button>
+                <button class="nav-tab" onclick="showSection('strategic-finance')">📈 Strategic Finance</button>
+                <button class="nav-tab" onclick="showSection('finance-innovation')">🚀 Finance Innovation</button>
+                <button class="nav-tab" onclick="showSection('revenue')">💰 Revenue</button>
+                <button class="nav-tab" onclick="showSection('close-to-report')">📋 Close to Report</button>
+                <button class="nav-tab" onclick="showSection('indirect-tax')">🌐 Indirect Tax</button>
+                <button class="nav-tab" onclick="showSection('accounts-payable')">📋 Accounts Payable</button>
+            </div>
+        </div>
+
+        <!-- Overview Section -->
+        <div id="overview" class="content-section active">
+            <div class="overview-content">
+                <div class="overview-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">23</div>
+                        <div class="stat-label">Total Good Items</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Total Bad Items</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Total Ugly Items</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">Active Teams</div>
+                    </div>
+                </div>
+
+                <div class="teams-grid">
+                    <div class="team-overview-card" onclick="showSection('strategic-finance')">
+                        <div class="team-name">📈 Strategic Finance</div>
+                        <div class="team-metrics">
+                            <div class="metric">
+                                <div class="metric-number good">12</div>
+                                <div class="metric-label">Good</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-number bad">2</div>
+                                <div class="metric-label">Bad</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-number good">0</div>
+                                <div class="metric-label">Ugly</div>
+                            </div>
+                        </div>
+                        <div class="team-summary">Breakthrough month: PFID cycle time 15.2 weeks → 1.6 weeks. AI agents deployed. Customer analytics transformation with comprehensive forecasting and reporting enhancements.</div>
+                    </div>
+
+                    <div class="team-overview-card" onclick="showSection('revenue')">
+                        <div class="team-name">💰 Revenue</div>
+                        <div class="team-metrics">
+                            <div class="metric">
+                                <div class="metric-number good">4</div>
+                                <div class="metric-label">Good</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-number good">0</div>
+                                <div class="metric-label">Bad</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-number ugly">1</div>
+                                <div class="metric-label">Ugly</div>
+                            </div>
+                        </div>
+                        <div class="team-summary">Strong process improvements: journal delegation, E2E mapping, policy completion ahead of schedule. EOL validation process needs enhancement.</div>
+                    </div>
+
+                    <div class="team-overview-card" onclick="showSection('finance-innovation')">
+                        <div class="team-name">🚀 Finance Innovation</div>
+                        <div class="team-metrics">
+                            <div class="metric">
+                                <div class="metric-number good">3</div>
+                                <div class="metric-label">Good</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-number good">0</div>
+                                <div class="metric-label">Bad</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-number good">0</div>
+                                <div class="metric-label">Ugly</div>
+                            </div>
+                        </div>
+                        <div class="team-summary">Platform excellence: FDM Renewals launched, Tableau migration progress, SOC Report Reviewer AI deployed. Clean execution with zero issues.</div>
+                    </div>
+
+                    <div class="team-overview-card" onclick="showSection('close-to-report')">
+                        <div class="team-name">📋 Close to Report</div>
+                        <div class="team-metrics">
+                            <div class="metric">
+                                <div class="metric-number good">2</div>
+                                <div class="metric-label">Good</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-number good">0</div>
+                                <div class="metric-label">Bad</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-number ugly">2</div>
+                                <div class="metric-label">Ugly</div>
+                            </div>
+                        </div>
+                        <div class="team-summary">Mixed performance: successful team development and Workday testing offset by Microsoft Brazil crisis and Australian compliance gap.</div>
+                    </div>
+
+                    <div class="team-overview-card" onclick="showSection('indirect-tax')">
+                        <div class="team-name">🌐 Indirect Tax</div>
+                        <div class="team-metrics">
+                            <div class="metric">
+                                <div class="metric-number good">1</div>
+                                <div class="metric-label">Good</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-number bad">1</div>
+                                <div class="metric-label">Bad</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-number good">0</div>
+                                <div class="metric-label">Ugly</div>
+                            </div>
+                        </div>
+                        <div class="team-summary">Major financial victory: $2.5M reserve release from Pagely and Mexico analysis. Balanced by SOX control deficiencies requiring process improvements.</div>
+                    </div>
+
+                    <div class="team-overview-card" onclick="showSection('accounts-payable')">
+                        <div class="team-name">📋 Accounts Payable</div>
+                        <div class="team-metrics">
+                            <div class="metric">
+                                <div class="metric-number good">1</div>
+                                <div class="metric-label">Good</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-number good">0</div>
+                                <div class="metric-label">Bad</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-number good">0</div>
+                                <div class="metric-label">Ugly</div>
+                            </div>
+                        </div>
+                        <div class="team-summary">Strong debut: Navan global travel system launched successfully driving cost savings and improved employee experience.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strategic Finance Report -->
+        <div id="strategic-finance" class="content-section">
+            <div class="report-content">
+                <div class="report-header">
+                    <h2>📈 Strategic Finance</h2>
+                    <p>August 2025 Good, Bad, Ugly Analysis Summary</p>
+                </div>
+
+                <div class="banner">
+                    <h3>🚀 Transformation Breakthrough</h3>
+                    <p>PFID cycle time: 15.2 weeks → 1.6 weeks | AI agents deployed | Customer analytics revolution</p>
+                </div>
+
+                <div class="section good">
+                    <h2 class="section-title">🌟 THE GOOD</h2>
+                    
+                    <h3 class="subsection-title">Process Excellence & Cycle Time Reduction</h3>
+                    
+                    <div class="item good">
+                        <div class="item-title">PFID Cycle Time Transformation</div>
+                        <div class="item-content">FIN E2E PFID Cycle Time 15.2 weeks (76 days) down to 1.6 weeks (8 days) +1.4 weeks vT YTD and +0.1weeks M/M. Aiming to have 75% reviewed within +/- 1.0 week(s) by end of year</div>
+                        <div class="detail-title">Impact:</div>
+                        <div class="item-content">90%+ reduction in review cycle time - transformational process improvement</div>
+                        <span class="impact-badge high">High Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Alex Murray, Sarah Kosterow</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">Clone Flow Process Launch</div>
+                        <div class="item-content">Launch of clone flow process to bypass necessity of accounting + tax review on low-risk pfid requests meeting "clone" criteria - SFT provides acctg/tax requirements and sign off on the corresponding reviews</div>
+                        <span class="impact-badge high">High Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Alex Murray, Sarah Kosterow</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">CMT Self-Serve Testing Adoption</div>
+                        <div class="item-content">Adoption of CMT to self-serve test use cases for pfid testing validation for quicker turnaroundon testing/validation</div>
+                        <span class="impact-badge high">High Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Alex Murray, Sarah Kosterow</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">Customer Leadership Dashboard Development</div>
+                        <div class="item-content">Developed a customer leadership dash enabling faster MBR and QBR customer reporting that includes key customer metrics by: Core, 123, Other M&A; BU and Geography; 2+ and 3+ product combinations; TTM GCR > and < 500; Retention, lifespan, and cohort-level breakdowns</div>
+                        <span class="impact-badge high">High Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Alex Murray, Ajit Mandaogane</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">Customer Forecast Development</div>
+                        <div class="item-content">Developed a customer forecast based on Top Line Froecasting new-new domain unit forecasts for new customer adds and expiry units forecast to estimate in period churn as well as inclusion of non-forecasted experiments and key events (Google Migration, $4.99 US + DEM COM experiment, OYBO, 10% off NC promos, future churn of current viral promos, etc.) - August actuals to forecast both new customer and churn < 2% - September pacing to forecast new customer < 1% and churn currently ~2.5%</div>
+                        <span class="impact-badge high">High Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Alex Murray</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">Weekly Pacing Cadence Operating Mechanism</div>
+                        <div class="item-content">Developed a operating mechanism for weekly pacing cadence, including estimated new customer adds + churn for the month and sharing/communicating to key business and analytics leaders</div>
+                        <span class="impact-badge high">High Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Ajit Mandaogane</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">MBR/QBR Reporting Cadence Enhancement</div>
+                        <div class="item-content">Implemented/adopted new cadence on MBR and QBR reporting, including proactively engaging in new channels, workstreams, and meetings to stay up to date throughout the month on new customer FoS, SEM, and pricing initiatives, reducing cycle time on drivers for reporting during month end</div>
+                        <span class="impact-badge high">High Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Scott Mertens</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">Top Line Data Integration Automation</div>
+                        <div class="item-content">Automated and streamlined pulling data from Top Line team integrated into workbook for inclusion in customer forecast and comparing previous budget case to actuals and future forecast to identify drivers in forecast changes</div>
+                        <span class="impact-badge high">High Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Scott Mertens</div>
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">AI & Automation Excellence</h3>
+
+                    <div class="item good">
+                        <div class="item-title">Product Hub AI Agent Deployment</div>
+                        <div class="item-content">Agentic AI: Launch/deployment of product hub AI agent - meeting transcripts, agendas - serving dual purpose: allows users to reach back to topics previously discussed to either 1) catch up on discussed topics including key outcomes, next steps, or action items, or 2) baseline previous conversations for setting requirements in future product requests</div>
+                        <span class="impact-badge">Medium Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Sarah Kosterow</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">Customer AI Agent Launch</div>
+                        <div class="item-content">Agentic AI: Launch of customer AI agent - can provide key customer metrics for given month, quarter, including forecast for future periods for GD Core, 123 Reg, and Other M&A as well as comparing to prior periods (months, quarters ,etc)</div>
+                        <span class="impact-badge">Medium Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Alex Murray</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">Tableau to QuickSight Migration - Budget Datasets</div>
+                        <div class="item-content">Tableau to QuickSight migration: All primary budget datasets were rebuilt in QS. 50% of dashboards are completed already and the other are in process or in UAT.</div>
+                        <span class="impact-badge">Low Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Kyle Gilbreath</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">Claude Sonnet Python Automation Script</div>
+                        <div class="item-content">Used Claude Sonnet 3.7 to develope a python automation script for the Top Gun team to ingest Weekly forecasting data from their Excel models into Teradata.</div>
+                        <span class="impact-badge">Medium Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Kyle Gilbreath</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section bad">
+                    <h2 class="section-title">⚠️ THE BAD</h2>
+                    
+                    <div class="item bad">
+                        <div class="item-title">VAC Data Reconciliation Issue</div>
+                        <div class="item-content">VAC Data: Could not reoncile to what was in Q2 BOD Document</div>
+                        <div class="detail-title">Root Cause:</div>
+                        <div class="item-content">Historicals were being restated due to meta data sources which updated historical numbers on users social stats. That caused users that previously hit VA thresholds through social to drop.</div>
+                        <div class="contributors">
+                            <div class="label">Owner:</div>
+                            <div>Scott Mertens, Ben Sansing</div>
+                        </div>
+                        <div class="detail-title">Learning & Actions Taken:</div>
+                        <div class="item-content">We are putting in guardrails against this for the future, so that these historical months don't get updated. Ticket: https://godaddy-corp.atlassian.net/browse/SDT-3405</div>
+                        <span class="impact-badge">Data Dependencies</span>
+                    </div>
+
+                    <div class="item bad">
+                        <div class="item-title">Machine Learning Forecasting Limitations</div>
+                        <div class="item-content">Machine learning forecasting: Teradata unable to process larger dataset</div>
+                        <div class="detail-title">Root Cause:</div>
+                        <div class="item-content">The Teradata sytsem was failing to execute the forecasting model due a lack of compute power.</div>
+                        <div class="contributors">
+                            <div class="label">Owner:</div>
+                            <div>Kyle Gilbreath</div>
+                        </div>
+                        <div class="detail-title">Learning & Actions Taken:</div>
+                        <div class="item-content">We were eventually able to get this to run after many weeks of working with the contractors. We assigned a larger compute cluster to the project and it is now working. However, this and many other challenges make us question if Teradata is the right system for our machine learning testing.</div>
+                        <span class="impact-badge">Tech Limitations</span>
+                    </div>
+                </div>
+
+                <div class="section ugly">
+                    <h2 class="section-title">🚨 THE UGLY</h2>
+                    
+                    <div class="no-ugly">
+                        <span style="font-size: 4em;">✅</span>
+                        <h3>No Ugly Items!</h3>
+                        <p>Strong issue resolution with no critical escalations this month</p>
+                    </div>
+                </div>
+
+                <div class="overall-assessment">
+                    <h3>Overall Assessment</h3>
+                    <p>Strategic Finance achieved breakthrough transformation in August with exceptional process improvements and AI deployment successes. The 90%+ reduction in PFID cycle time represents industry-leading operational excellence, while AI agent deployments and comprehensive customer analytics demonstrate strategic innovation capabilities. Technical challenges with data dependencies and ML infrastructure highlight areas for continued platform investment and data governance enhancement.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Finance Innovation Report -->
+        <div id="finance-innovation" class="content-section">
+            <div class="report-content">
+                <div class="report-header">
+                    <h2>🚀 Finance Innovation</h2>
+                    <p>August 2025 Good, Bad, Ugly Analysis Summary</p>
+                </div>
+
+                <div class="banner">
+                    <h3>⚡ Platform & AI Excellence</h3>
+                    <p>FDM Renewals launched | Tableau migration progress | SOC AI agent deployed</p>
+                </div>
+
+                <div class="section good">
+                    <h2 class="section-title">🌟 THE GOOD</h2>
+                    
+                    <h3 class="subsection-title">Platform Development & Migration</h3>
+                    
+                    <div class="item good">
+                        <div class="item-title">FDM Renewals Launched on Schedule</div>
+                        <div class="item-content">FDM Renewals launched on 8/1</div>
+                        <div class="detail-title">Impact:</div>
+                        <div class="item-content">Critical platform capability delivered on time, enabling automated renewal processing</div>
+                        <span class="impact-badge high">High Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Shara A, Anuj K</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">Tableau to QuickSight Migration Initiated</div>
+                        <div class="item-content">Started Migration and migrated few Tableau reports to QS</div>
+                        <div class="detail-title">Impact:</div>
+                        <div class="item-content">Cost reduction initiative progressing with successful initial migrations</div>
+                        <span class="impact-badge high">High Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Keerthy Cittineni, Lety Enriquez, Vinayak Pandey</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">SOC Report Reviewer AI Agent</div>
+                        <div class="item-content">SOC Report Reviewer</div>
+                        <div class="detail-title">Impact:</div>
+                        <div class="item-content">AI-powered compliance evaluation enhancing audit efficiency</div>
+                        <span class="impact-badge">Low Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Chloe Matthews</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section bad">
+                    <h2 class="section-title">⚠️ THE BAD</h2>
+                    
+                    <div class="no-bad">
+                        <span style="font-size: 4em;">✅</span>
+                        <h3>No Bad Items This Month!</h3>
+                        <p>Clean execution with no process issues reported</p>
+                    </div>
+                </div>
+
+                <div class="section ugly">
+                    <h2 class="section-title">🚨 THE UGLY</h2>
+                    
+                    <div class="no-ugly">
+                        <span style="font-size: 4em;">✅</span>
+                        <h3>No Ugly Items!</h3>
+                        <p>Excellent performance with zero critical issues</p>
+                    </div>
+                </div>
+
+                <div class="overall-assessment">
+                    <h3>Overall Assessment</h3>
+                    <p>Finance Innovation maintained excellent execution standards in August with successful platform deliveries and AI expansion. Clean performance profile with zero issues demonstrates mature operational processes and effective project management.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Revenue Report -->
+        <div id="revenue" class="content-section">
+            <div class="report-content">
+                <div class="report-header">
+                    <h2>💰 Revenue Team</h2>
+                    <p>August 2025 Good, Bad, Ugly Analysis Summary</p>
+                </div>
+
+                <div class="banner">
+                    <h3>🔄 Process Enhancement Month</h3>
+                    <p>Journal delegation | E2E mapping | Policy completion ahead of schedule</p>
+                </div>
+
+                <div class="section good">
+                    <h2 class="section-title">🌟 THE GOOD</h2>
+                    
+                    <h3 class="subsection-title">Process Optimization & Policy Leadership</h3>
+                    
+                    <div class="item good">
+                        <div class="item-title">Journal Entry Delegation Finalized</div>
+                        <div class="item-content">Finalized delegation of journal entrues from managers, no O2C managers are preparing RTB journal entries as of August close</div>
+                        <span class="impact-badge">Medium Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Amanda Vigil, Curtis Jacobs, Destany Jackson</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">E2E Transaction Mapping for Refund Process</div>
+                        <div class="item-content">E2E transaction mapping for refund process, allowing for exploration into automation for the allowance process</div>
+                        <span class="impact-badge">Medium Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Melissa Bremner, Alvin Ngai</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">Aftermarket Revenue Policy Completion</div>
+                        <div class="item-content">Aftermarket revenue policy memo completed and reviewed, three months ahead of prior year. Will allow more time for auditor review before YE</div>
+                        <span class="impact-badge">Medium Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Vivienne Su</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">Fibunet System Ownership Alignment</div>
+                        <div class="item-content">Successful cross functional alignment on ownership of Fibunet system (legacy EMEA billing platform)</div>
+                        <span class="impact-badge">Medium Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Anca Dulgheru</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section bad">
+                    <h2 class="section-title">⚠️ THE BAD</h2>
+                    
+                    <div class="no-bad">
+                        <span style="font-size: 4em;">✅</span>
+                        <h3>No Bad Items This Month!</h3>
+                        <p>Strong process execution with effective management</p>
+                    </div>
+                </div>
+
+                <div class="section ugly">
+                    <h2 class="section-title">🚨 THE UGLY</h2>
+                    
+                    <div class="item ugly">
+                        <div class="item-title">EOL Validation Process Gap</div>
+                        <div class="item-content">EOL validation did not involve flagging impact on customer count - resulted in unforeseen potential delay of EOL (lost revenue) in favor of retaining customers.</div>
+                        <div class="contributors">
+                            <div class="label">Owner:</div>
+                            <div>Meagan Shaver/Alex Murray/Scott Mertens</div>
+                        </div>
+                        <div class="detail-title">Action:</div>
+                        <div class="item-content">Update EOL process to include churn modeling</div>
+                        <span class="impact-badge">Process Enhancement</span>
+                    </div>
+                </div>
+
+                <div class="overall-assessment">
+                    <h3>Overall Assessment</h3>
+                    <p>Revenue team demonstrated strong process maturation in August with effective delegation, proactive policy development, and system alignment. The EOL validation gap presents an opportunity to integrate predictive analytics into decision-making processes. Overall performance shows operational excellence focus.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Close to Report Report -->
+        <div id="close-to-report" class="content-section">
+            <div class="report-content">
+                <div class="report-header">
+                    <h2>📋 Close to Report</h2>
+                    <p>August 2025 Good, Bad, Ugly Analysis Summary</p>
+                </div>
+
+                <div class="banner">
+                    <h3>🔄 Development & Crisis Management</h3>
+                    <p>Team growth initiatives offset by persistent international compliance challenges</p>
+                </div>
+
+                <div class="section good">
+                    <h2 class="section-title">🌟 THE GOOD</h2>
+                    
+                    <div class="item good">
+                        <div class="item-title">Team Rotation & Development Initiative</div>
+                        <div class="item-content">Rotation of responsibilities resulting from internal transfers and providing existing team members changes for their growth and development</div>
+                        <span class="impact-badge high">High Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Cindy, Diego, Erica, Taylar</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">Workday Intercompany Functionality Update Testing</div>
+                        <div class="item-content">Workday intercompany functionality update testing</div>
+                        <span class="impact-badge high">High Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Nick Adduce</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section bad">
+                    <h2 class="section-title">⚠️ THE BAD</h2>
+                    
+                    <div class="no-bad">
+                        <span style="font-size: 4em;">✅</span>
+                        <h3>No Bad Items This Month!</h3>
+                        <p>Effective issue management with no process deficiencies</p>
+                    </div>
+                </div>
+
+                <div class="section ugly">
+                    <h2 class="section-title">🚨 THE UGLY</h2>
+                    
+                    <div class="item ugly">
+                        <div class="item-title">Microsoft Brazil Payment Crisis Continues</div>
+                        <div class="item-content">We've faced persistent issues with Microsoft rejecting our Brazil invoice payments for over a year, with rejected payments now exceeding $1M. In July, Microsoft revealed the rejections stemmed from their changing of GoDaddy's country of origin during NCE migration. Despite our payment and MSFT acceptance of a $1M payment, new registrations in Brazil are still blocked.</div>
+                        <div class="contributors">
+                            <div class="label">Owner:</div>
+                            <div>Michele Dugan, David Woolf, Ryan Gist, Dom Nelson, Ryan Beal, Katy Kendall</div>
+                        </div>
+                        <div class="detail-title">Action:</div>
+                        <div class="item-content">We are currently working with GoDaddy legal and Microsoft partner management to resolve these critical issues and determine next steps, including reissuing invoices to the correct entity. We also expanded our analysis of entity alignment with MSFT and identified potential issues to address as exceptions, or alternative entity sales paths.</div>
+                        <span class="impact-badge high">Immediate Action Required</span>
+                    </div>
+
+                    <div class="item ugly">
+                        <div class="item-title">Australian GST Group Lodgement Compliance Gap</div>
+                        <div class="item-content">Statutory audit firm identified that we do not have a indirect tax sharing agreement for GoDaddy Online Services Australia (CMP005), which prepares a GST group lodgement and payment on behalf of multiple GD entities that are not part of it's individual statutory financial statements. Disallowed input tax credits (ITCs) are recognized in CMP005 and not pushed back to the related entity.</div>
+                        <div class="contributors">
+                            <div class="label">Owner:</div>
+                            <div>David Woolf, Katy Kendall, Catherine Hodges, Froy Leon</div>
+                        </div>
+                        <div class="detail-title">Action:</div>
+                        <div class="item-content">Consulting with KPMG to breakout the B/S and P&L impacts specific to CMP005, evaulated for materiality and prior year impacts and post adjustments, if necessary, in order to finalize the audit.</div>
+                        <span class="impact-badge high">Immediate Action Required</span>
+                    </div>
+                </div>
+
+                <div class="overall-assessment">
+                    <h3>Overall Assessment</h3>
+                    <p>Close to Report demonstrates strong team development capabilities while managing complex international crises. Team rotation successes show operational maturity, while persistent payment and compliance issues highlight the complexity of global operations requiring sustained cross-functional coordination.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Indirect Tax Report -->
+        <div id="indirect-tax" class="content-section">
+            <div class="report-content">
+                <div class="report-header">
+                    <h2>🌐 Indirect Tax</h2>
+                    <p>August 2025 Good, Bad, Ugly Analysis Summary</p>
+                </div>
+
+                <div class="banner">
+                    <h3>💰 $2.5M Reserve Release Victory</h3>
+                    <p>Pagely LLC $1.3M + Mexico analysis $1.2M = Major financial impact</p>
+                </div>
+
+                <div class="section good">
+                    <h2 class="section-title">🌟 THE GOOD</h2>
+                    
+                    <div class="item good">
+                        <div class="item-title">$2.5M Total Reserve Release Achievement</div>
+                        <div class="item-content">Completed sales tax/nexus review for Pagely LLC resulting in completion of risk assessment and release of sales tax reserve of $1.3m. Completed Mexico Taxability Analysis resulting in release of VAT reserve of $1.2m. Total estimated Q3 reserve release $2.5m.</div>
+                        <div class="detail-title">Impact:</div>
+                        <div class="item-content">Major financial benefit through comprehensive tax analysis and risk assessment</div>
+                        <span class="impact-badge">Medium Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Catherine Hodges, Katy Kendall</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section bad">
+                    <h2 class="section-title">⚠️ THE BAD</h2>
+                    
+                    <div class="item bad">
+                        <div class="item-title">SOX Control Deficiencies Identified</div>
+                        <div class="item-content">SOX Control deficiencies identified for 09.02.04, 09.02.05 & 09.02.08</div>
+                        <div class="detail-title">Root Cause:</div>
+                        <div class="item-content">Personnel changes and incomplete handovers led to 3 controls not being completed.</div>
+                        <div class="contributors">
+                            <div class="label">Owner:</div>
+                            <div>Christina, Katy, Froy</div>
+                        </div>
+                        <div class="detail-title">Learning & Actions Taken:</div>
+                        <div class="item-content">More structured handover process for the future. Create more detailed process documentation and checklist for all SOX controls.</div>
+                        <span class="impact-badge">Process Clarity</span>
+                    </div>
+                </div>
+
+                <div class="section ugly">
+                    <h2 class="section-title">🚨 THE UGLY</h2>
+                    
+                    <div class="no-ugly">
+                        <span style="font-size: 4em;">✅</span>
+                        <h3>No Ugly Items!</h3>
+                        <p>Effective issue containment with no critical escalations</p>
+                    </div>
+                </div>
+
+                <div class="overall-assessment">
+                    <h3>Overall Assessment</h3>
+                    <p>Indirect Tax delivered exceptional financial results with $2.5M in reserve releases while managing process improvement opportunities. The SOX control issues present manageable operational challenges with clear improvement pathways. Strong technical analysis capabilities generating significant value.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accounts Payable Report -->
+        <div id="accounts-payable" class="content-section">
+            <div class="report-content">
+                <div class="report-header">
+                    <h2>📋 Accounts Payable</h2>
+                    <p>August 2025 Good, Bad, Ugly Analysis Summary</p>
+                </div>
+
+                <div class="banner">
+                    <h3>🚀 Navan Launch Success</h3>
+                    <p>Global travel management transformation - cost savings and efficiency gains</p>
+                </div>
+
+                <div class="section good">
+                    <h2 class="section-title">🌟 THE GOOD</h2>
+                    
+                    <div class="item good">
+                        <div class="item-title">Navan Global Travel Management System Launch</div>
+                        <div class="item-content">Successful full launch of Navan, our new global travel management system. Will drive employee time savings and company cost reductions.</div>
+                        <span class="impact-badge">Medium Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Natalie Akgar-Hedderson, Michel Barrocas</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section bad">
+                    <h2 class="section-title">⚠️ THE BAD</h2>
+                    
+                    <div class="no-bad">
+                        <span style="font-size: 4em;">✅</span>
+                        <h3>No Bad Items!</h3>
+                        <p>Clean implementation with excellent execution</p>
+                    </div>
+                </div>
+
+                <div class="section ugly">
+                    <h2 class="section-title">🚨 THE UGLY</h2>
+                    
+                    <div class="no-ugly">
+                        <span style="font-size: 4em;">✅</span>
+                        <h3>No Ugly Items!</h3>
+                        <p>Perfect inaugural month performance</p>
+                    </div>
+                </div>
+
+                <div class="overall-assessment">
+                    <h3>Overall Assessment</h3>
+                    <p>Accounts Payable demonstrates excellent execution with successful Navan launch delivering immediate value through cost optimization and employee experience improvement. Perfect inaugural month performance suggests strong implementation capabilities.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Add smooth scrolling to top when switching sections
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // Add click handlers for team cards in overview
+        document.querySelectorAll('.team-overview-card').forEach(card => {
+            card.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
