@@ -491,6 +491,7 @@
             <div class="nav-tabs">
                 <button class="nav-tab active" onclick="showSection('overview')">📊 Overview</button>
                 <button class="nav-tab" onclick="showSection('strategic-finance')">📈 Strategic Finance</button>
+                <button class="nav-tab" onclick="showSection('direct-tax')">🏛️ Direct Tax</button>
                 <button class="nav-tab" onclick="showSection('finance-innovation')">🚀 Finance Innovation</button>
                 <button class="nav-tab" onclick="showSection('revenue')">💰 Revenue</button>
                 <button class="nav-tab" onclick="showSection('close-to-report')">📋 Close to Report</button>
@@ -504,19 +505,19 @@
             <div class="overview-content">
                 <div class="overview-stats">
                     <div class="stat-card">
-                        <div class="stat-number">23</div>
+                        <div class="stat-number">29</div>
                         <div class="stat-label">Total Good Items</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">3</div>
+                        <div class="stat-number">4</div>
                         <div class="stat-label">Total Bad Items</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">3</div>
+                        <div class="stat-number">4</div>
                         <div class="stat-label">Total Ugly Items</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">6</div>
+                        <div class="stat-number">7</div>
                         <div class="stat-label">Active Teams</div>
                     </div>
                 </div>
@@ -541,6 +542,44 @@
                         <div class="team-summary">Breakthrough month: PFID cycle time 15.2 weeks → 1.6 weeks. AI agents deployed. Customer analytics transformation with comprehensive forecasting and reporting enhancements.</div>
                     </div>
 
+                    <div class="team-overview-card" onclick="showSection('direct-tax')">
+                        <div class="team-name">🏛️ Direct Tax</div>
+                        <div class="team-metrics">
+                            <div class="metric">
+                                <div class="metric-number good">4</div>
+                                <div class="metric-label">Good</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-number good">0</div>
+                                <div class="metric-label">Bad</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-number good">0</div>
+                                <div class="metric-label">Ugly</div>
+                            </div>
+                        </div>
+                        <div class="team-summary">Major comeback with $3M+ financial impact: Colombia $1.28M refund, Netherlands $816K, Germany/Israel $1M reductions, plus process automation wins.</div>
+                    </div>
+
+                    <div class="team-overview-card" onclick="showSection('finance-innovation')">
+                        <div class="team-name">🚀 Finance Innovation</div>
+                        <div class="team-metrics">
+                            <div class="metric">
+                                <div class="metric-number good">4</div>
+                                <div class="metric-label">Good</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-number good">0</div>
+                                <div class="metric-label">Bad</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-number good">0</div>
+                                <div class="metric-label">Ugly</div>
+                            </div>
+                        </div>
+                        <div class="team-summary">Platform excellence: FDM Renewals launched, 22% Tableau migration progress, SOC AI agent deployed, plus training initiatives. Clean execution.</div>
+                    </div>
+
                     <div class="team-overview-card" onclick="showSection('revenue')">
                         <div class="team-name">💰 Revenue</div>
                         <div class="team-metrics">
@@ -558,25 +597,6 @@
                             </div>
                         </div>
                         <div class="team-summary">Strong process improvements: journal delegation, E2E mapping, policy completion ahead of schedule. EOL validation process needs enhancement.</div>
-                    </div>
-
-                    <div class="team-overview-card" onclick="showSection('finance-innovation')">
-                        <div class="team-name">🚀 Finance Innovation</div>
-                        <div class="team-metrics">
-                            <div class="metric">
-                                <div class="metric-number good">3</div>
-                                <div class="metric-label">Good</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-number good">0</div>
-                                <div class="metric-label">Bad</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-number good">0</div>
-                                <div class="metric-label">Ugly</div>
-                            </div>
-                        </div>
-                        <div class="team-summary">Platform excellence: FDM Renewals launched, Tableau migration progress, SOC Report Reviewer AI deployed. Clean execution with zero issues.</div>
                     </div>
 
                     <div class="team-overview-card" onclick="showSection('close-to-report')">
@@ -602,19 +622,19 @@
                         <div class="team-name">🌐 Indirect Tax</div>
                         <div class="team-metrics">
                             <div class="metric">
-                                <div class="metric-number good">1</div>
+                                <div class="metric-number good">2</div>
                                 <div class="metric-label">Good</div>
                             </div>
                             <div class="metric">
-                                <div class="metric-number bad">1</div>
+                                <div class="metric-number bad">2</div>
                                 <div class="metric-label">Bad</div>
                             </div>
                             <div class="metric">
-                                <div class="metric-number good">0</div>
+                                <div class="metric-number ugly">1</div>
                                 <div class="metric-label">Ugly</div>
                             </div>
                         </div>
-                        <div class="team-summary">Major financial victory: $2.5M reserve release from Pagely and Mexico analysis. Balanced by SOX control deficiencies requiring process improvements.</div>
+                        <div class="team-summary">Mixed profile: $2.5M reserve release and Canada audit closure offset by SOX deficiencies, VAT reconciliation challenges, and cost efficiency issues.</div>
                     </div>
 
                     <div class="team-overview-card" onclick="showSection('accounts-payable')">
@@ -831,6 +851,131 @@
             </div>
         </div>
 
+        <!-- Direct Tax Report -->
+        <div id="direct-tax" class="content-section">
+            <div class="report-content">
+                <div class="report-header">
+                    <h2>🏛️ Direct Tax</h2>
+                    <p>August 2025 Good, Bad, Ugly Analysis Summary</p>
+                </div>
+
+                <div class="banner">
+                    <h3>🏆 Major Financial Comeback</h3>
+                    <p>$3M+ impact: Colombia $1.28M + Netherlands $816K + Germany $1M + Process automation</p>
+                </div>
+
+                <div class="section good">
+                    <h2 class="section-title">🌟 THE GOOD</h2>
+                    
+                    <h3 class="subsection-title">Global Tax Refunds & Reductions</h3>
+                    
+                    <div class="item good">
+                        <div class="item-title">Colombia Tax Refund Success - USD $1.28 Million</div>
+                        <div class="item-content">On August 26, 2025, we successfully obtained approval from the Colombian Tax Authority for a tax refund of approximately COP 5 billion (around USD 1.28 million). This was achieved by strategically negotiating application fees with our local service provider in advance and submitting the application promptly after filing the TY2024 CIT return in April 2025. We expect to sell the TIDIS certificate for cash by mid-September and properly updated the 2025 8+4 Cash Tax Forecast.</div>
+                        <span class="impact-badge">Medium Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Jack Deng, Jennifer Decker</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">Netherlands NOL Utilization - USD $816K Refund</div>
+                        <div class="item-content">In the Netherlands, we have researched, documented, and supported the utilization of approximately EUR 1.3 million in NOL, resulting in a total cash tax refund of around EUR 700,000 (approximately USD 816,000) for TY2022 and TY2023, which we expect to receive in December 2025. 2025 8+4 Cash Tax Forecast is updated and noted for this change accordingly.</div>
+                        <span class="impact-badge">Medium Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Alex Lukin, Jack Deng, Jennifer Decker</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">Germany & Israel Tax Optimization - USD $1 Million</div>
+                        <div class="item-content">For Germany, we have thoroughly reviewed the current year's estimated tax liabilities and tax refund positions for TY2021-TY2025, resulting in a reduction of cash tax outflow in 2025 by approximately EUR 900,000 (around USD 1 million). In Israel, we have significantly reduced CIT liabilities by over 77% going forward by securing SBC deductions that we had previously been unable to deduct. 2025 8+4 Cash Tax Forecast is updated and noted for these changes accordingly.</div>
+                        <span class="impact-badge">Medium Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Alex Lukin, Jack Deng, Jennifer Decker</div>
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">Process Automation & Efficiency</h3>
+
+                    <div class="item good">
+                        <div class="item-title">JE EIB Upload Protocol Automation</div>
+                        <div class="item-content">Working with Accounting team and FDAT, a revised JE EIB upload protocal has been implemented that will allow us to attach our JE support in mass. This would save hours a quarter as we use to have to manually attach the support to each of our entries which is usually around 80.</div>
+                        <span class="impact-badge high">High Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Sam Smith, Florance Febriyani, Taylar Crampton</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section bad">
+                    <h2 class="section-title">⚠️ THE BAD</h2>
+                    
+                    <div class="no-bad">
+                        <span style="font-size: 4em;">✅</span>
+                        <h3>No Bad Items This Month!</h3>
+                        <p>Excellent execution with major financial achievements</p>
+                    </div>
+                </div>
+
+                <div class="section ugly">
+                    <h2 class="section-title">🚨 THE UGLY</h2>
+                    
+                    <div class="no-ugly">
+                        <span style="font-size: 4em;">✅</span>
+                        <h3>No Ugly Items!</h3>
+                        <p>Outstanding performance with zero critical issues</p>
+                    </div>
+                </div>
+
+                <div class="section summary">
+                    <h2 class="section-title">📊 SUMMARY</h2>
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <strong>💰 Financial Excellence:</strong> Over $3M in tax refunds and reductions across multiple countries
+                        </div>
+                        <div class="summary-card">
+                            <strong>🌍 Global Impact:</strong> Successful tax optimization in Colombia, Netherlands, Germany, and Israel
+                        </div>
+                        <div class="summary-card">
+                            <strong>⚡ Process Innovation:</strong> JE EIB automation saving hours per quarter
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section takeaways">
+                    <h2 class="section-title">🎯 KEY TAKEAWAYS</h2>
+                    
+                    <div class="key-takeaway">
+                        <div class="number">1.</div>
+                        <div class="title">Financial Leadership:</div>
+                        <div>Exceptional global tax management delivering over $3M in measurable financial benefits</div>
+                    </div>
+                    
+                    <div class="key-takeaway">
+                        <div class="number">2.</div>
+                        <div class="title">Strategic Execution:</div>
+                        <div>Proactive planning and strategic negotiations maximizing refund opportunities</div>
+                    </div>
+                    
+                    <div class="key-takeaway">
+                        <div class="number">3.</div>
+                        <div class="title">Process Innovation:</div>
+                        <div>Automation initiatives reducing manual effort and improving operational efficiency</div>
+                    </div>
+                </div>
+
+                <div class="overall-assessment">
+                    <h3>Overall Assessment</h3>
+                    <p>Direct Tax achieved exceptional performance in August with over $3M in financial benefits through strategic tax planning across multiple countries. The team's global expertise in tax optimization, combined with process automation initiatives, demonstrates outstanding value creation and operational excellence. Clean performance profile with zero issues suggests mature processes and effective execution capabilities.</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Finance Innovation Report -->
         <div id="finance-innovation" class="content-section">
             <div class="report-content">
@@ -862,14 +1007,14 @@
                     </div>
 
                     <div class="item good">
-                        <div class="item-title">Tableau to QuickSight Migration Initiated</div>
-                        <div class="item-content">Started Migration and migrated few Tableau reports to QS</div>
+                        <div class="item-title">Tableau to QuickSight Migration Progress</div>
+                        <div class="item-content">Started Migration and migrated 22% Tableau reports to QS</div>
                         <div class="detail-title">Impact:</div>
-                        <div class="item-content">Cost reduction initiative progressing with successful initial migrations</div>
+                        <div class="item-content">Significant cost reduction progress with 22% of reports successfully migrated</div>
                         <span class="impact-badge high">High Impact</span>
                         <div class="contributors">
                             <div class="label">Contributors:</div>
-                            <div>Keerthy Cittineni, Lety Enriquez, Vinayak Pandey</div>
+                            <div>Solonia, Keerthy Cittineni, Lety Enriquez, Vinayak Pandey</div>
                         </div>
                     </div>
 
@@ -882,6 +1027,20 @@
                         <div class="contributors">
                             <div class="label">Contributors:</div>
                             <div>Chloe Matthews</div>
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">Training & Process Enhancement</h3>
+
+                    <div class="item good">
+                        <div class="item-title">Banking Requirements Agent Training Initiative</div>
+                        <div class="item-content">Process Improvement Training for Payroll and Tax Team for Outbound Payments using the new Banking requirements agent and leveraging Financial Institution documents</div>
+                        <div class="detail-title">Impact:</div>
+                        <div class="item-content">Enhanced team capabilities through AI-powered training and process improvement</div>
+                        <span class="impact-badge">Medium Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Jennifer Roy</div>
                         </div>
                     </div>
                 </div>
@@ -1096,12 +1255,14 @@
                 </div>
 
                 <div class="banner">
-                    <h3>💰 $2.5M Reserve Release Victory</h3>
-                    <p>Pagely LLC $1.3M + Mexico analysis $1.2M = Major financial impact</p>
+                    <h3>💰 $2.5M Reserve Release + Canada Audit Success</h3>
+                    <p>Major financial wins offset by process and cost efficiency challenges</p>
                 </div>
 
                 <div class="section good">
                     <h2 class="section-title">🌟 THE GOOD</h2>
+                    
+                    <h3 class="subsection-title">Tax Analysis & Audit Success</h3>
                     
                     <div class="item good">
                         <div class="item-title">$2.5M Total Reserve Release Achievement</div>
@@ -1112,6 +1273,18 @@
                         <div class="contributors">
                             <div class="label">Contributors:</div>
                             <div>Catherine Hodges, Katy Kendall</div>
+                        </div>
+                    </div>
+
+                    <div class="item good">
+                        <div class="item-title">Canada Federal GST Audit Closure</div>
+                        <div class="item-content">Closure of CRA audit (Canada Federal GST) covering periods 2021 ro 2023 with no assessment.</div>
+                        <div class="detail-title">Impact:</div>
+                        <div class="item-content">Successful audit defense with zero assessment, demonstrating strong compliance and documentation</div>
+                        <span class="impact-badge">Medium Impact</span>
+                        <div class="contributors">
+                            <div class="label">Contributors:</div>
+                            <div>Froy Leon, Ninfa Cepeda</div>
                         </div>
                     </div>
                 </div>
@@ -1132,21 +1305,79 @@
                         <div class="item-content">More structured handover process for the future. Create more detailed process documentation and checklist for all SOX controls.</div>
                         <span class="impact-badge">Process Clarity</span>
                     </div>
+
+                    <div class="item bad">
+                        <div class="item-title">VAT Reconciliation Data Inconsistencies</div>
+                        <div class="item-content">Inconsistencies in data sources, balances and FX rates creating a challenging VAT reconciliation process. The ability for customers to pay in multiple currencies, plus tax reporting currencies not all in USD.</div>
+                        <div class="detail-title">Root Cause:</div>
+                        <div class="item-content">Multiple currency complexity and inconsistent data sources complicating reconciliation processes</div>
+                        <div class="contributors">
+                            <div class="label">Owner:</div>
+                            <div>Katy, KPMG, David W</div>
+                        </div>
+                        <div class="detail-title">Learning & Actions Taken:</div>
+                        <div class="item-content">Requirement for certainty on data sources and SoP for unreconciled balances.</div>
+                        <span class="impact-badge">Data Dependencies</span>
+                    </div>
                 </div>
 
                 <div class="section ugly">
                     <h2 class="section-title">🚨 THE UGLY</h2>
                     
-                    <div class="no-ugly">
-                        <span style="font-size: 4em;">✅</span>
-                        <h3>No Ugly Items!</h3>
-                        <p>Effective issue containment with no critical escalations</p>
+                    <div class="item ugly">
+                        <div class="item-title">Higher Than Industry Norm VAT Cost Inefficiencies</div>
+                        <div class="item-content">HIgher than industry norm benchmarked VAT (and DST/GRT) costs hitting Indirect Tax expense. Business decisions and ways of working create indirect tax inefficiencies. We need to consider how we can push these costs back to the business to incentivise the business to operate officiently and price accordingly.</div>
+                        <div class="contributors">
+                            <div class="label">Owner:</div>
+                            <div>Katy, Christina</div>
+                        </div>
+                        <div class="detail-title">Action:</div>
+                        <div class="item-content">Assessment of the key categories of tax cost, quantification of costs. Discuss options and impacts of tax cost push down.</div>
+                        <div class="detail-title">Learning:</div>
+                        <div class="item-content">Education of tax cost impact of business/organizational/contractual changes.</div>
+                        <span class="impact-badge">Other Business Impact</span>
+                    </div>
+                </div>
+
+                <div class="section summary">
+                    <h2 class="section-title">📊 SUMMARY</h2>
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <strong>💰 Financial Victories:</strong> $2.5M reserve release plus successful Canada audit defense
+                        </div>
+                        <div class="summary-card">
+                            <strong>⚠️ Process Challenges:</strong> SOX deficiencies and VAT reconciliation complexity
+                        </div>
+                        <div class="summary-card">
+                            <strong>🔧 Cost Efficiency:</strong> VAT cost optimization requiring business process changes</div>
+                    </div>
+                </div>
+
+                <div class="section takeaways">
+                    <h2 class="section-title">🎯 KEY TAKEAWAYS</h2>
+                    
+                    <div class="key-takeaway">
+                        <div class="number">1.</div>
+                        <div class="title">Financial Excellence:</div>
+                        <div>Outstanding tax analysis and audit defense capabilities delivering significant bottom-line impact</div>
+                    </div>
+                    
+                    <div class="key-takeaway">
+                        <div class="number">2.</div>
+                        <div class="title">Process Improvement Opportunities:</div>
+                        <div>Multiple operational challenges requiring enhanced documentation and data governance</div>
+                    </div>
+                    
+                    <div class="key-takeaway">
+                        <div class="number">3.</div>
+                        <div class="title">Strategic Cost Management:</div>
+                        <div>VAT cost efficiency initiatives requiring cross-functional business process optimization</div>
                     </div>
                 </div>
 
                 <div class="overall-assessment">
                     <h3>Overall Assessment</h3>
-                    <p>Indirect Tax delivered exceptional financial results with $2.5M in reserve releases while managing process improvement opportunities. The SOX control issues present manageable operational challenges with clear improvement pathways. Strong technical analysis capabilities generating significant value.</p>
+                    <p>Indirect Tax delivered exceptional financial results with $2.5M in reserve releases and successful audit defense while managing multiple operational challenges. The team's technical capabilities generate significant value, though process gaps in SOX controls, data reconciliation, and cost efficiency present opportunities for systematic improvement. Mixed performance profile requiring balanced focus on both achievements and operational excellence.</p>
                 </div>
             </div>
         </div>
